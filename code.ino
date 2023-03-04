@@ -1,7 +1,7 @@
 int data_pin = 11;
 int clock_pin = 13;
 int latch_pin = 12;
-int transd1 = 3; //transistor display 1
+int transd1 = 3;
 int transd2 = 4;
 int transd3 = 5;
 int transd4 = 6;
@@ -37,8 +37,8 @@ void mostraCifraSR(int cifra) {
 }
 void calcolaNumero4d(int numero) {
   if (numero > 0) {
-    cifra4 = numero % 10; //prendo l'ultima cifra del numero usando l'operatore percentuale (resto della divisione)
-    numero = numero / 10; //diviamo per 10 per togliere da "numero" l'ultima cifra perché lavoriamo con numeri interi
+    cifra4 = numero % 10; 
+    numero = numero / 10; 
     if (numero > 0) {
       cifra3 = numero % 10;
       numero = numero / 10;
