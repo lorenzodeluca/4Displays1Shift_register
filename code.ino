@@ -1,25 +1,24 @@
 int data_pin = 11;
 int clock_pin = 13;
 int latch_pin = 12;
-int transd1 = 3;
-int transd2 = 4;
-int transd3 = 5;
-int transd4 = 6;
-int a1325;
-int ritardo = 50; //msec
-int tempoEsec;
+int transd1 = 6; //transistor display 1
+int transd2 = 5;
+int transd3 = 4;
+int transd4 = 3;
+int sensor;
+int ritardo = 40; //msec
 int cifra1, cifra2, cifra3, cifra4;
 int digits [10][8]{
-  {1,1,1,1,1,0,1,0}, // digit 0
-  {0,1,1,0,0,0,0,0}, // digit 1
-  {1,1,0,1,1,1,0,0}, // digit 2
-  {1,1,1,1,0,1,0,0}, // digit 3
-  {0,1,1,0,0,1,1,0}, // digit 4
-  {1,0,1,1,0,1,1,0}, // digit 5
-  {1,0,1,1,1,1,1,0}, // digit 6
-  {1,1,1,0,0,0,0,0}, // digit 7
-  {1,1,1,1,1,1,1,0}, // digit 8
-  {1,1,1,1,0,1,1,0}  // digit 9
+  {0,1,1,1,0,1,1,1}, // digit 0
+  {0,1,0,0,0,0,0,1}, // digit 1
+  {0,0,1,1,1,0,1,1}, // digit 2
+  {0,1,1,0,1,0,1,1}, // digit 3
+  {0,1,0,0,1,1,0,1}, // digit 4
+  {0,1,1,0,1,1,1,0}, // digit 5
+  {0,1,1,1,1,1,1,0}, // digit 6
+  {0,1,0,0,0,0,1,1}, // digit 7
+  {0,1,1,1,1,1,1,1}, // digit 8
+  {0,1,1,0,1,1,1,1}  // digit 9
 };
 void mostraCifraSR(int cifra) {
   digitalWrite(latch_pin, LOW);
@@ -36,9 +35,13 @@ void mostraCifraSR(int cifra) {
   digitalWrite(latch_pin, HIGH);
 }
 void calcolaNumero4d(int numero) {
+  cifra1 = 0;
+  cifra2 = 0;
+  cifra3 = 0;
+  cifra4 = 0;
   if (numero > 0) {
     cifra4 = numero % 10; 
-    numero = numero / 10; 
+    numero = numero / 10;
     if (numero > 0) {
       cifra3 = numero % 10;
       numero = numero / 10;
@@ -81,7 +84,6 @@ void mostraCifre(){
   delay(ritardo);
 }
 void setup() {
-  Serial.begin (9600);
   pinMode(data_pin, OUTPUT);
   pinMode(clock_pin, OUTPUT);
   pinMode(latch_pin, OUTPUT);
@@ -93,15 +95,7 @@ void setup() {
 }
 
 void loop() {
-  cifra1 = 0; 
-  cifra2 = 0;
-  cifra3 = 0;
-  cifra4 = 0;
-  a1325 = 1325;
-  Serial.println(a1325);
-  calcolaNumero4d (a1325); 
-  tempoEsec=millis();
-  while((millis()-tempoEsec)<500){
-    mostraCifre();
-  }
+  sensor = 176;
+  calcolaNumero4d (a1325);
+  mostraCifre();
 }
