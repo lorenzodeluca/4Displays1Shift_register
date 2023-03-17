@@ -96,6 +96,6 @@ void setup() {
 
 void loop() {
   sensor = 176;
-  calcolaNumero4d (a1325);
+  calcolaNumero4d (sensor);
   mostraCifre();
 }
